@@ -35,3 +35,15 @@ if (!function_exists('ewallet_data')) {
         return $ewallets;
     }
 }
+
+if (!function_exists('payment_method_label')) {
+    function payment_method_label(?string $method): string
+    {
+        if (!$method) return '-';
+        if (str_starts_with($method, 'e_wallet_')) {
+            $provider = str_replace('e_wallet_', '', $method);
+            return 'E-Wallet (' . ucfirst($provider) . ')';
+        }
+        return ucfirst(str_replace('_', ' ', $method));
+    }
+}
