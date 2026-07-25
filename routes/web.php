@@ -7,6 +7,12 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/migrate-now', function () {
+    Artisan::call('migrate:fresh --force --seed');
+    return '<pre>' . Artisan::output() . '</pre>';
+});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
