@@ -1,0 +1,18 @@
+[php]
+version = "8.3"
+
+[phpextensions]
+extensions = [
+  "bcmath",
+  "ctype",
+  "curl",
+  "dom",
+  "fileinfo",
+  "gd",
+  "json",
+  "mbstring",
+  "openssl",
+  "pdo_mysql",
+  "tokenizer",
+  "xml",
+]
