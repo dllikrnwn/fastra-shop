@@ -70,20 +70,54 @@
         {{-- Payment Method --}}
         <div class="nb-card-static p-6">
             <h2 class="font-display font-bold text-lg mb-5" style="color: var(--text-primary);">Metode Pembayaran</h2>
-            <div class="space-y-3" x-data="{ selected: 'qris' }">
-                @foreach(['qris' => ['QRIS', 'Scan QR dari bank/e-wallet'], 'bank_transfer' => ['Transfer Bank', 'Transfer langsung ke rekening'], 'e_wallet' => ['E-Wallet', 'GoPay, OVO, DANA']] as $key => [$name, $desc])
+            <div class="space-y-3" x-data="{ selected: 'qris', ew: '' }">
+                @php $ewallets = payment_setting('ewallets', []); @endphp
                 <label class="flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all duration-150" style="border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--border); background: var(--bg-secondary);"
-                    :style="selected === '{{ $key }}' ? 'border-color: var(--accent); background: rgba(0,229,255,0.08); box-shadow: 4px 4px 0 var(--accent-shadow);' : ''">
-                    <input type="radio" name="payment_method" value="{{ $key }}" x-model="selected" class="hidden">
-                    <div class="w-5 h-5 rounded-full border-[3px] flex items-center justify-center shrink-0" :style="selected === '{{ $key }}' ? 'border-color: var(--accent)' : 'border-color: var(--border)'">
-                        <div x-show="selected === '{{ $key }}'" class="w-2.5 h-2.5 rounded-full" style="background: var(--accent);"></div>
+                    :style="selected === 'qris' ? 'border-color: var(--accent); background: rgba(0,229,255,0.08); box-shadow: 4px 4px 0 var(--accent-shadow);' : ''">
+                    <input type="radio" name="payment_method" value="qris" x-model="selected" class="hidden">
+                    <div class="w-5 h-5 rounded-full border-[3px] flex items-center justify-center shrink-0" :style="selected === 'qris' ? 'border-color: var(--accent)' : 'border-color: var(--border)'">
+                        <div x-show="selected === 'qris'" class="w-2.5 h-2.5 rounded-full" style="background: var(--accent);"></div>
                     </div>
                     <div class="flex-1">
-                        <p class="font-display font-bold text-sm" style="color: var(--text-primary);">{{ $name }}</p>
-                        <p class="text-xs" style="color: var(--text-secondary);">{{ $desc }}</p>
+                        <p class="font-display font-bold text-sm" style="color: var(--text-primary);">QRIS</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Scan QR dari bank/e-wallet</p>
                     </div>
                 </label>
-                @endforeach
+
+                <label class="flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all duration-150" style="border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--border); background: var(--bg-secondary);"
+                    :style="selected === 'bank_transfer' ? 'border-color: var(--accent); background: rgba(0,229,255,0.08); box-shadow: 4px 4px 0 var(--accent-shadow);' : ''">
+                    <input type="radio" name="payment_method" value="bank_transfer" x-model="selected" class="hidden">
+                    <div class="w-5 h-5 rounded-full border-[3px] flex items-center justify-center shrink-0" :style="selected === 'bank_transfer' ? 'border-color: var(--accent)' : 'border-color: var(--border)'">
+                        <div x-show="selected === 'bank_transfer'" class="w-2.5 h-2.5 rounded-full" style="background: var(--accent);"></div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-display font-bold text-sm" style="color: var(--text-primary);">Transfer Bank</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Transfer langsung ke rekening</p>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-4 p-4 rounded-xl cursor-pointer transition-all duration-150" style="border: 3px solid var(--border); box-shadow: 3px 3px 0 var(--border); background: var(--bg-secondary);"
+                    :style="selected === 'e_wallet' ? 'border-color: var(--accent); background: rgba(0,229,255,0.08); box-shadow: 4px 4px 0 var(--accent-shadow);' : ''">
+                    <input type="radio" name="payment_method" value="e_wallet" x-model="selected" class="hidden">
+                    <div class="w-5 h-5 rounded-full border-[3px] flex items-center justify-center shrink-0" :style="selected === 'e_wallet' ? 'border-color: var(--accent)' : 'border-color: var(--border)'">
+                        <div x-show="selected === 'e_wallet'" class="w-2.5 h-2.5 rounded-full" style="background: var(--accent);"></div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-display font-bold text-sm" style="color: var(--text-primary);">E-Wallet</p>
+                        <p class="text-xs" style="color: var(--text-secondary);">Pilih penyedia e-wallet</p>
+                    </div>
+                </label>
+
+                {{-- Dropdown E-Wallet --}}
+                <div x-show="selected === 'e_wallet'" x-cloak x-transition class="ml-9">
+                    <select name="e_wallet_provider" x-model="ew" class="nb-input py-2.5 text-sm" required>
+                        <option value="">— Pilih E-Wallet —</option>
+                        @foreach($ewallets as $key => $val)
+                        <option value="{{ $key }}">{{ $val['name'] ?? ucfirst($key) }} {{ $val['number'] ? '✓' : '(belum diset)' }}</option>
+                        @endforeach
+                    </select>
+                    @error('e_wallet_provider')<p class="text-red-500 text-xs mt-1 font-bold">{{ $message }}</p>@enderror
+                </div>
             </div>
             @error('payment_method')<p class="text-red-500 text-xs mt-2 font-bold">{{ $message }}</p>@enderror
         </div>

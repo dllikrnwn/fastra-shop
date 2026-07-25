@@ -90,18 +90,12 @@
 @if($banners->isNotEmpty())
 <section class="py-6" x-data="bannerSlider()">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative overflow-hidden nb-card-static" style="border-color: var(--border);">
+        <div class="relative nb-card-static overflow-hidden transition-all duration-200 hover:scale-[1.01] hover:-translate-y-0.5" style="border-color: var(--border); box-shadow: 3px 3px 0 var(--border);">
             <div class="flex transition-transform duration-500" :style="'transform: translateX(-' + (current * 100) + '%)'">
                 @foreach($banners as $banner)
                 <a href="{{ $banner->link ?: '#' }}" class="w-full shrink-0">
-                    <div class="relative overflow-hidden" style="aspect-ratio: 3/1;">
-                        <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4" style="background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);">
-                            <p class="font-display font-black text-xl md:text-3xl text-white mb-1 drop-shadow-lg">{{ $banner->title }}</p>
-                            @if($banner->subtitle)
-                            <p class="text-sm md:text-base text-gray-200 drop-shadow">{{ $banner->subtitle }}</p>
-                            @endif
-                        </div>
+                    <div class="overflow-hidden" style="aspect-ratio: 3/1;">
+                        <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                     </div>
                 </a>
                 @endforeach

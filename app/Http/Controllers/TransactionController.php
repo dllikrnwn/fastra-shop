@@ -81,7 +81,12 @@ class TransactionController extends Controller
             'buyer_email' => 'required|email|max:255',
             'buyer_phone' => 'nullable|string|max:20',
             'payment_method' => 'required|string|in:qris,bank_transfer,e_wallet',
+            'e_wallet_provider' => 'nullable|required_if:payment_method,e_wallet|string|in:gopay,ovo,dana,shopeepay',
         ]);
+
+        if ($request->payment_method === 'e_wallet' && $request->e_wallet_provider) {
+            $validated['payment_method'] = 'e_wallet_' . $request->e_wallet_provider;
+        }
 
         $user = auth()->user();
         if ($user && $user->isAdmin()) {

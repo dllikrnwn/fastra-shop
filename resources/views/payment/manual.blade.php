@@ -84,25 +84,30 @@
         @endif
 
         {{-- E-Wallet --}}
-        @if($transaction->payment_method === 'e_wallet')
-            <h2 class="font-display font-bold text-lg mb-4" style="color: var(--text-primary);">Bayar via {{ payment_setting('ewallet_name') }}</h2>
+        @if(str_starts_with($transaction->payment_method, 'e_wallet'))
+            @php $prov = str_replace('e_wallet_', '', $transaction->payment_method); $ew = ewallet_data($prov); @endphp
+            <h2 class="font-display font-bold text-lg mb-4" style="color: var(--text-primary);">Bayar via {{ $ew['name'] ?? 'E-Wallet' }}</h2>
             <div class="p-5" style="border: 3px solid var(--border); border-radius: 12px; background: var(--bg-secondary);">
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-sm" style="color: var(--text-secondary);">Layanan</span>
-                        <span class="font-display font-bold" style="color: var(--text-primary);">{{ payment_setting('ewallet_name') }}</span>
+                        <span class="font-display font-bold" style="color: var(--text-primary);">{{ $ew['name'] ?? '-' }}</span>
                     </div>
+                    @if(!empty($ew['number']))
                     <div class="flex justify-between items-center">
                         <span class="text-sm" style="color: var(--text-secondary);">No HP</span>
                         <div class="flex items-center gap-2">
-                            <span class="font-mono font-bold" style="color: var(--accent);">{{ payment_setting('ewallet_number') }}</span>
-                            <button @click="copyToClipboard('{{ payment_setting('ewallet_number') }}', $event)" class="text-xs px-3 py-1.5 rounded-lg font-bold" style="background: var(--accent); color: #000; border: 2px solid var(--border);">Salin</button>
+                            <span class="font-mono font-bold" style="color: var(--accent);">{{ $ew['number'] }}</span>
+                            <button @click="copyToClipboard('{{ $ew['number'] }}', $event)" class="text-xs px-3 py-1.5 rounded-lg font-bold" style="background: var(--accent); color: #000; border: 2px solid var(--border);">Salin</button>
                         </div>
                     </div>
+                    @if(!empty($ew['holder']))
                     <div class="flex justify-between items-center">
                         <span class="text-sm" style="color: var(--text-secondary);">a.n.</span>
-                        <span class="font-display font-bold" style="color: var(--text-primary);">{{ payment_setting('ewallet_holder') }}</span>
+                        <span class="font-display font-bold" style="color: var(--text-primary);">{{ $ew['holder'] }}</span>
                     </div>
+                    @endif
+                    @endif
                 </div>
             </div>
             <div class="text-center mt-4">

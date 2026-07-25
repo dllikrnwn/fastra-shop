@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PaymentSettingController extends Controller
 {
+    private const DEFAULT_EWALLETS = [
+        'gopay' => ['name' => 'GoPay', 'number' => '628815381632', 'holder' => 'Fastra Shop'],
+        'ovo' => ['name' => 'OVO', 'number' => '', 'holder' => ''],
+        'dana' => ['name' => 'DANA', 'number' => '', 'holder' => ''],
+        'shopeepay' => ['name' => 'ShopeePay', 'number' => '', 'holder' => ''],
+    ];
+
     public function index()
     {
         $settings = $this->getSettings();
@@ -21,9 +28,10 @@ class PaymentSettingController extends Controller
             'bank_name' => 'required|string|max:100',
             'bank_account' => 'required|string|max:50',
             'bank_holder' => 'required|string|max:255',
-            'ewallet_name' => 'required|string|max:100',
-            'ewallet_number' => 'required|string|max:50',
-            'ewallet_holder' => 'required|string|max:255',
+            'ewallets' => 'required|array',
+            'ewallets.*.name' => 'required|string|max:50',
+            'ewallets.*.number' => 'nullable|string|max:50',
+            'ewallets.*.holder' => 'nullable|string|max:100',
             'qris_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
@@ -32,9 +40,7 @@ class PaymentSettingController extends Controller
             'bank_name' => $validated['bank_name'],
             'bank_account' => $validated['bank_account'],
             'bank_holder' => $validated['bank_holder'],
-            'ewallet_name' => $validated['ewallet_name'],
-            'ewallet_number' => $validated['ewallet_number'],
-            'ewallet_holder' => $validated['ewallet_holder'],
+            'ewallets' => $validated['ewallets'],
             'qris_image' => $this->getSettings()['qris_image'] ?? '',
         ];
 
@@ -58,9 +64,7 @@ class PaymentSettingController extends Controller
                 'bank_name' => 'Seabank',
                 'bank_account' => '901615310372',
                 'bank_holder' => 'Fastra Shop',
-                'ewallet_name' => 'GoPay',
-                'ewallet_number' => '628815381632',
-                'ewallet_holder' => 'Fastra Shop',
+                'ewallets' => self::DEFAULT_EWALLETS,
                 'qris_image' => '',
             ];
         }

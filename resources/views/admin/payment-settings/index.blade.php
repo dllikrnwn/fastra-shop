@@ -45,20 +45,23 @@
         {{-- E-Wallet --}}
         <div class="nb-card-static p-6">
             <h2 class="font-display font-semibold text-gray-900 dark:text-white mb-4">E-Wallet</h2>
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Nama Layanan</label>
-                    <input type="text" name="ewallet_name" value="{{ old('ewallet_name', payment_setting('ewallet_name')) }}" class="nb-input" placeholder="GoPay">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">No HP / ID E-Wallet</label>
-                    <input type="text" name="ewallet_number" value="{{ old('ewallet_number', payment_setting('ewallet_number')) }}" class="nb-input" placeholder="628xxxxxxxxxxxx">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Nama Pemilik</label>
-                    <input type="text" name="ewallet_holder" value="{{ old('ewallet_holder', payment_setting('ewallet_holder')) }}" class="nb-input" placeholder="Nama pemilik e-wallet">
+            @php $ew = old('ewallets', payment_setting('ewallets', [])); @endphp
+            @foreach(['gopay' => 'GoPay', 'ovo' => 'OVO', 'dana' => 'DANA', 'shopeepay' => 'ShopeePay'] as $key => $label)
+            <div class="p-4 mb-4 rounded-xl" style="border: 2px solid var(--border);">
+                <p class="font-display font-bold text-sm mb-3" style="color: var(--text-primary);">{{ $label }}</p>
+                <input type="hidden" name="ewallets[{{ $key }}][name]" value="{{ $label }}">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold mb-1" style="color: var(--text-secondary);">No HP</label>
+                        <input type="text" name="ewallets[{{ $key }}][number]" value="{{ $ew[$key]['number'] ?? '' }}" class="nb-input py-2 text-sm" placeholder="628xxxxxxxxxxxx">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1" style="color: var(--text-secondary);">Nama Pemilik</label>
+                        <input type="text" name="ewallets[{{ $key }}][holder]" value="{{ $ew[$key]['holder'] ?? '' }}" class="nb-input py-2 text-sm" placeholder="Fastra Shop">
+                    </div>
                 </div>
             </div>
+            @endforeach
         </div>
 
         {{-- QRIS --}}
