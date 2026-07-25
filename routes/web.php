@@ -15,6 +15,11 @@ Route::get('/migrate-now', function () {
     return '<pre>' . Artisan::output() . '</pre>';
 });
 
+Route::get('/fix-storage', function () {
+    Artisan::call('storage:link --force');
+    return '<pre>' . Artisan::output() . '</pre>';
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
