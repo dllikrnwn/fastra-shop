@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/migrate-now', function () {
     Artisan::call('migrate:fresh --force --seed');
+    Artisan::call('storage:link --force');
     return '<pre>' . Artisan::output() . '</pre>';
 });
 
