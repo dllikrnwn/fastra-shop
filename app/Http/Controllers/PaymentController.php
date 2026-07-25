@@ -31,13 +31,21 @@ class PaymentController extends Controller
         } catch (\Exception $e) {
         }
 
+        $method = $transaction->payment_method;
+        if (str_starts_with($method, 'e_wallet_')) {
+            $provider = str_replace('e_wallet_', '', $method);
+            $methodLabel = 'E-Wallet (' . ucfirst($provider) . ')';
+        } else {
+            $methodLabel = ucfirst(str_replace('_', ' ', $method));
+        }
+
         $waMessage = urlencode(
             "Pembayaran Baru ✅\n\n"
             . "Invoice: {$transaction->invoice}\n"
             . "Game: {$transaction->game->name} - {$transaction->denomination->name}\n"
             . "ID Game: {$transaction->game_nickname}\n"
             . "Total: Rp " . number_format($transaction->amount, 0, ',', '.') . "\n"
-            . "Metode: " . ucfirst(str_replace('_', ' ', $transaction->payment_method ?? '-')) . "\n"
+            . "Metode: {$methodLabel}\n"
             . "Pembeli: {$transaction->buyer_name}\n"
             . "No WA: {$transaction->buyer_phone}\n\n"
             . "Silakan verifikasi di admin panel."
