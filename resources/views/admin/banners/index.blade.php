@@ -33,7 +33,7 @@
                     <tr style="border-bottom: 1px solid var(--border);">
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-3">
-                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-20 h-10 object-cover rounded-lg border-2" style="border-color: var(--border);">
+                                <img src="{{ asset('storage-files/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-20 h-10 object-cover rounded-lg border-2" style="border-color: var(--border);">
                                 <div>
                                     <p class="font-display font-bold" style="color: var(--text-primary);">{{ $banner->title }}</p>
                                     @if($banner->subtitle)<p class="text-xs" style="color: var(--text-secondary);">{{ $banner->subtitle }}</p>@endif

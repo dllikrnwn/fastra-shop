@@ -39,7 +39,7 @@
             <div class="game-card">
                 <div class="aspect-square flex items-center justify-center p-4 overflow-hidden" style="background: var(--bg-secondary);">
                     @if($game->image)
-                        <img loading="lazy" src="{{ asset('storage/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+                        <img loading="lazy" src="{{ asset('storage-files/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
                     @else
                         <div class="text-4xl font-display font-black" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</div>
                     @endif

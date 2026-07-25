@@ -95,7 +95,7 @@
                 @foreach($banners as $banner)
                 <a href="{{ $banner->link ?: '#' }}" class="w-full shrink-0">
                     <div class="overflow-hidden" style="aspect-ratio: 3/1;">
-                        <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <img src="{{ asset('storage-files/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                     </div>
                 </a>
                 @endforeach
@@ -147,7 +147,7 @@
                 <div class="game-card">
                     <div class="aspect-square flex items-center justify-center p-4 overflow-hidden" style="background: var(--bg-secondary);">
                         @if($game->image)
-                            <img loading="lazy" src="{{ asset('storage/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+                            <img loading="lazy" src="{{ asset('storage-files/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
                         @else
                             <div class="text-5xl font-display font-black" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</div>
                         @endif
@@ -183,7 +183,7 @@
                 <div class="game-card">
                     <div class="aspect-square flex items-center justify-center p-4 overflow-hidden" style="background: var(--bg-secondary);">
                         @if($game->image)
-                            <img loading="lazy" src="{{ asset('storage/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
+                            <img loading="lazy" src="{{ asset('storage-files/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110">
                         @else
                             <div class="text-4xl font-display font-black" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</div>
                         @endif

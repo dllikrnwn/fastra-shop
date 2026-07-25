@@ -9,7 +9,7 @@
 <div>
     <label class="block text-sm font-display font-bold mb-1.5" style="color: var(--text-primary);">Gambar Banner <span style="color: #FF4444;">{{ isset($banner) && $banner->image ? '' : '*' }}</span></label>
     @if(isset($banner) && $banner->image)
-    <div class="mb-3"><img src="{{ asset('storage/' . $banner->image) }}" alt="" class="w-full h-24 object-cover rounded-lg border-[3px]" style="border-color: var(--border);"></div>
+    <div class="mb-3"><img src="{{ asset('storage-files/' . $banner->image) }}" alt="" class="w-full h-24 object-cover rounded-lg border-[3px]" style="border-color: var(--border);"></div>
     @endif
     <input type="file" name="image" accept="image/*" class="nb-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-[2px] file:border-black file:text-sm file:font-bold file:cursor-pointer" {{ isset($banner) ? '' : 'required' }}>
     <p class="text-xs mt-1" style="color: var(--text-secondary);">Format: JPG, PNG, WebP. Maks 4MB. Rasio 3:1 disarankan.</p>

@@ -23,7 +23,7 @@
             <div class="flex items-center gap-4">
                 <div class="w-14 h-14 rounded-xl overflow-hidden border-[3px] shrink-0 flex items-center justify-center" style="border-color: var(--border); background: var(--bg-secondary);">
                     @if($game->image)
-                        <img src="{{ asset('storage/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain">
+                        <img src="{{ asset('storage-files/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain">
                     @else
                         <span class="font-display font-black text-xl" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</span>
                     @endif

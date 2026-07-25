@@ -42,7 +42,7 @@
             @if(payment_setting('qris_image') && \Illuminate\Support\Facades\Storage::disk('public')->exists(payment_setting('qris_image')))
             <div class="flex justify-center mb-4">
                 <div class="bg-white p-3 sm:p-4 rounded-xl border-[3px]" style="border-color: var(--border);">
-                    <img src="{{ asset('storage/' . payment_setting('qris_image')) }}" alt="QRIS" class="w-44 h-44 sm:w-56 sm:h-56 object-contain">
+                    <img src="{{ asset('storage-files/' . payment_setting('qris_image')) }}" alt="QRIS" class="w-44 h-44 sm:w-56 sm:h-56 object-contain">
                 </div>
             </div>
             @else

@@ -8,7 +8,7 @@
     <div class="flex items-center gap-4 mb-10 reveal">
         <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
             @if($user->avatar)
-                <img src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full rounded-full object-cover">
+                <img src="{{ asset('storage-files/' . $user->avatar) }}" alt="" class="w-full h-full rounded-full object-cover">
             @else
                 <span class="text-2xl font-display font-bold text-accent">{{ substr($user->name, 0, 1) }}</span>
             @endif
@@ -83,7 +83,7 @@
             <a href="{{ route('games.show', $game->slug) }}" class="nb-card-static hover:border-accent/20 transition-all group">
                 <div class="nb-card-static p-3">
                     <div class="aspect-square bg-gradient-to-br from-accent/5 to-gray-100 dark:to-surface-dark-elevated flex items-center justify-center rounded-lg overflow-hidden">
-                        @if($game->image) <img loading="lazy" src="{{ asset('storage/' . $game->image) }}" alt="" class="w-full h-full object-contain transition-transform group-hover:scale-110">
+                        @if($game->image) <img loading="lazy" src="{{ asset('storage-files/' . $game->image) }}" alt="" class="w-full h-full object-contain transition-transform group-hover:scale-110">
                         @else <span class="text-2xl font-display font-bold text-gray-300">{{ substr($game->name, 0, 2) }}</span>
                         @endif
                     </div>
@@ -105,7 +105,7 @@
             @forelse($recentTransactions as $tx)
             <a href="{{ route('transactions.show', $tx->invoice) }}" class="nb-card-static rounded-xl px-4 py-3 flex items-center gap-3 hover:border-accent/20 transition-all group">
                 <div class="w-10 h-10 rounded-lg bg-accent/5 flex items-center justify-center shrink-0 overflow-hidden">
-                    @if($tx->game->image) <img src="{{ asset('storage/' . $tx->game->image) }}" alt="" class="w-full h-full object-contain">@endif
+                    @if($tx->game->image) <img src="{{ asset('storage-files/' . $tx->game->image) }}" alt="" class="w-full h-full object-contain">@endif
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="font-display font-semibold text-sm text-gray-900 dark:text-white truncate">{{ $tx->game->name }}</p>

@@ -41,7 +41,7 @@
                         <td class="px-4 py-3">
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-lg overflow-hidden border-2 flex items-center justify-center shrink-0" style="border-color: var(--border); background: var(--bg-secondary);">
-                                    @if($game->image) <img src="{{ asset('storage/' . $game->image) }}" alt="" class="w-full h-full object-contain">
+                                    @if($game->image) <img src="{{ asset('storage-files/' . $game->image) }}" alt="" class="w-full h-full object-contain">
                                     @else <span class="font-display font-bold text-xs" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</span>
                                     @endif
                                 </div>

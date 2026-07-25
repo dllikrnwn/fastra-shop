@@ -13,7 +13,7 @@
             <div class="nb-card-static overflow-hidden" style="border-color: var(--accent); box-shadow: 4px 4px 0 var(--accent-shadow);">
                 <div class="aspect-square flex items-center justify-center p-8" style="background: var(--bg-secondary);">
                     @if($game->image)
-                        <img src="{{ asset('storage/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain">
+                        <img src="{{ asset('storage-files/' . $game->image) }}" alt="{{ $game->name }}" class="w-full h-full object-contain">
                     @else
                         <div class="text-7xl font-display font-black" style="color: var(--text-secondary);">{{ substr($game->name, 0, 2) }}</div>
                     @endif
@@ -103,7 +103,7 @@
                 <p class="font-display font-bold text-sm mb-3" style="color: var(--text-primary);">🎬 Video Tutorial</p>
                 <div class="rounded-xl overflow-hidden border-[3px]" style="border-color: var(--border);">
                     <video controls class="w-full max-h-[400px] bg-black">
-                        <source src="{{ asset('storage/' . $game->guide_video) }}" type="video/mp4">
+                        <source src="{{ asset('storage-files/' . $game->guide_video) }}" type="video/mp4">
                         Browser tidak mendukung video.
                     </video>
                 </div>

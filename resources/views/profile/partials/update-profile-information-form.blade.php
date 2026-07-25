@@ -18,7 +18,7 @@
             <div class="flex items-center gap-4">
                 <div class="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center shrink-0 overflow-hidden border-2 border-accent/20">
                     @if($user->avatar)
-                        <img id="avatar-preview" src="{{ asset('storage/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
+                        <img id="avatar-preview" src="{{ asset('storage-files/' . $user->avatar) }}" alt="" class="w-full h-full object-cover">
                     @else
                         <div id="avatar-placeholder" class="text-3xl font-display font-bold text-accent">{{ substr($user->name, 0, 1) }}</div>
                     @endif

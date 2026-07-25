@@ -71,7 +71,7 @@
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Gambar QRIS</label>
                 @if(payment_setting('qris_image') && \Illuminate\Support\Facades\Storage::disk('public')->exists(payment_setting('qris_image')))
                 <div class="mb-3">
-                    <img src="{{ asset('storage/' . payment_setting('qris_image')) }}" alt="QRIS" class="w-40 h-40 object-contain rounded-xl border border-gray-200 dark:border-surface-dark-border p-2 bg-white">
+                    <img src="{{ asset('storage-files/' . payment_setting('qris_image')) }}" alt="QRIS" class="w-40 h-40 object-contain rounded-xl border border-gray-200 dark:border-surface-dark-border p-2 bg-white">
                 </div>
                 @endif
                 <input type="file" name="qris_image" accept="image/*" class="nb-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-[2px] file:border-black file:text-sm file:font-medium file:bg-accent/10 file:text-accent hover:file:bg-accent/20 file:cursor-pointer">

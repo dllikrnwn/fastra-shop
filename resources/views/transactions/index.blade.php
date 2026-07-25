@@ -11,7 +11,7 @@
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-accent/5 to-gray-100 dark:to-surface-dark-elevated flex items-center justify-center shrink-0 overflow-hidden">
                 @if($transaction->game->image)
-                    <img src="{{ asset('storage/' . $transaction->game->image) }}" alt="{{ $transaction->game->name }}" class="w-full h-full object-contain">
+                    <img src="{{ asset('storage-files/' . $transaction->game->image) }}" alt="{{ $transaction->game->name }}" class="w-full h-full object-contain">
                 @else
                     <div class="text-xl font-display font-bold text-gray-300 dark:text-gray-600">{{ substr($transaction->game->name, 0, 2) }}</div>
                 @endif

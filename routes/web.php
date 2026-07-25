@@ -8,6 +8,15 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+
+Route::get('/storage-files/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath) || !is_file($fullPath)) {
+        abort(404);
+    }
+    return response()->file($fullPath);
+})->where('path', '.*');
 
 Route::get('/migrate-now', function () {
     Artisan::call('migrate:fresh --force --seed');

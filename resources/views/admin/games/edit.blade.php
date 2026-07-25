@@ -31,7 +31,7 @@
                 <label class="block text-sm font-display font-bold mb-1.5" style="color: var(--text-primary);">Gambar</label>
                 @if($game->image)
                 <div class="mb-3">
-                    <img src="{{ asset('storage/' . $game->image) }}" alt="" class="w-20 h-20 object-contain rounded-lg border-[3px] p-2" style="border-color: var(--border); background: var(--bg-secondary);">
+                    <img src="{{ asset('storage-files/' . $game->image) }}" alt="" class="w-20 h-20 object-contain rounded-lg border-[3px] p-2" style="border-color: var(--border); background: var(--bg-secondary);">
                 </div>
                 @endif
                 <input type="file" name="image" accept="image/*" class="nb-input file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-[2px] file:border-black file:text-sm file:font-bold file:cursor-pointer">
@@ -42,7 +42,7 @@
                 @if($game->guide_video)
                 <div class="mb-3">
                     <video class="w-full max-w-xs rounded-lg border-[3px]" style="border-color: var(--border);" controls>
-                        <source src="{{ asset('storage/' . $game->guide_video) }}" type="video/mp4">
+                        <source src="{{ asset('storage-files/' . $game->guide_video) }}" type="video/mp4">
                     </video>
                 </div>
                 @endif
